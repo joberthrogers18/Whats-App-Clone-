@@ -1,5 +1,7 @@
 package br.com.whatsappandroid.cursoandroid.whatsapp.activity;
 
+import android.Manifest;
+import android.opengl.EGLExt;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -15,6 +17,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import br.com.whatsappandroid.cursoandroid.whatsapp.R;
+import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Permissao;
 import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Preferencias;
 
 public class LoginActivity extends AppCompatActivity {
@@ -24,11 +27,17 @@ public class LoginActivity extends AppCompatActivity {
     private EditText codigoArea;
     private EditText nome;
     private Button cadastrar;
+    private String[] permissoesNescessarios = new String[]{
+            Manifest.permission.SEND_SMS,
+            Manifest.permission.INTERNET
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Permissao.validaPermissoes(1,this,permissoesNescessarios); // verificar permissoes
 
         nome = findViewById(R.id.editNome);
         telefone = findViewById(R.id.editTelefone);
