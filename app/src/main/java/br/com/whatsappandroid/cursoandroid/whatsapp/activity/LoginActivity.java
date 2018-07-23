@@ -2,6 +2,7 @@ package br.com.whatsappandroid.cursoandroid.whatsapp.activity;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.opengl.EGLExt;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
@@ -91,6 +93,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 // envio SMS: tel -> +5561993150824
                 boolean enviadoSMS = enviarSMS("+" + telefoneSemFormatacao, mensagemEnvio);
+
+                if(enviadoSMS){
+
+                    Intent intent = new Intent(LoginActivity.this, ValidadorActivity.class);// instanciou uma intent
+                    startActivity(intent); // definiu a nova rota
+                    finish(); // liberou a Login Activity
+
+                }else{
+                    Toast.makeText(getApplicationContext(),"Problema ao enviar o SMS!", Toast.LENGTH_SHORT).show();
+                }
 
                 /*
                 HashMap<String, String> usuario = preferencias.getDadosUsuarios(); //recuperando os dados do usuario
