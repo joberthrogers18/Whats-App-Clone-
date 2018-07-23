@@ -1,7 +1,9 @@
-package br.com.whatsappandroid.cursoandroid.whatsapp;
+package br.com.whatsappandroid.cursoandroid.whatsapp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import br.com.whatsappandroid.cursoandroid.whatsapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
