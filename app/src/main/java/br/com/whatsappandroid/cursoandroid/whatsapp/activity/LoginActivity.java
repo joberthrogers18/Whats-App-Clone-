@@ -2,6 +2,7 @@ package br.com.whatsappandroid.cursoandroid.whatsapp.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -67,20 +68,41 @@ public class LoginActivity extends AppCompatActivity {
 
                 Random randomico = new Random();
                 int numeroRandomico = randomico.nextInt(9999 - 1000) + 1000; // tokens apenas com quatro digitos
-
                 String token = String.valueOf(numeroRandomico);
+                String mensagemEnvio = "Whats App codigo de confirmação: " + token;
 
                 Log.i("TOKEN", token);
 
-                //Salvar dadaos de validação
+                //Salvar dados de validação
                 Preferencias preferencias = new Preferencias(LoginActivity.this);
                 preferencias.salvarUsuarioPreferencias(nomeUsuario, telefoneSemFormatacao,token); // passando os parametros para ser salvos no arquivo
 
+                // envio SMS: tel -> +5561993150824
+                boolean enviadoSMS = enviarSMS("+" + telefoneSemFormatacao, mensagemEnvio);
+
+                /*
                 HashMap<String, String> usuario = preferencias.getDadosUsuarios(); //recuperando os dados do usuario
 
                 Log.i("Token","T:" + usuario.get("token") + "NOME:" + usuario.get("nome") + "FONE:" + usuario.get("telefone"));
+                */
 
             }
         });
+    }
+
+    private boolean enviarSMS(String telefone, String mensagem){
+
+        try{
+
+            SmsManager smsManager = SmsManager.getDefault(); // habilitando a enviar SMS
+            smsManager.sendTextMessage(telefone,null,mensagem,null, null);
+            return true;
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+            return false;
+        }
+
     }
 }
