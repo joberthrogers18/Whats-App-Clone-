@@ -19,9 +19,10 @@
         app:layout_constraintVertical_bias="0.102" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editNome"
         android:layout_width="339dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
         android:ems="10"
         android:hint="Digite seu nome"
         android:inputType="textPersonName"
@@ -34,51 +35,51 @@
         app:layout_constraintVertical_bias="0.149" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editCodPais"
         android:layout_width="62dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="+55"
         android:inputType="number"
         android:textColor="?attr/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btCadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/editNome"
         app:layout_constraintVertical_bias="0.433" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/editCodArea"
         android:layout_width="59dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="11"
         android:inputType="number"
         android:textColor="?attr/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toStartOf="@+id/editText4"
-        app:layout_constraintStart_toEndOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/btCadastrar"
+        app:layout_constraintEnd_toStartOf="@+id/editTelefone"
+        app:layout_constraintStart_toEndOf="@+id/editCodPais"
+        app:layout_constraintTop_toBottomOf="@+id/editNome"
         app:layout_constraintVertical_bias="0.433" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editTelefone"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="993150824"
         android:inputType="number"
         android:textColor="?attr/colorAccent"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btCadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.915"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/editNome"
         app:layout_constraintVertical_bias="0.433" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btCadastrar"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
