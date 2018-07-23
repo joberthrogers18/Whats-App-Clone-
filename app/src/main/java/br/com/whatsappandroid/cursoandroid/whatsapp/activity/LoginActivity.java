@@ -1,7 +1,10 @@
 package br.com.whatsappandroid.cursoandroid.whatsapp.activity;
 
 import android.Manifest;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.opengl.EGLExt;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -37,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Permissao.validaPermissoes(1,this,permissoesNescessarios); // verificar permissoes
+        Permissao.validaPermissoes(1,LoginActivity.this,permissoesNescessarios); // verificar permissoes
 
         nome = findViewById(R.id.editNome);
         telefone = findViewById(R.id.editTelefone);
@@ -113,5 +116,33 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
 
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){ //sempre exibe quando a pessoa da deny na permissao
+
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+
+        for (int resultado:grantResults){
+            if (resultado == PackageManager.PERMISSION_DENIED){
+                alertaValidacaoPermicao();
+            }
+        }
+
+    }
+
+    private void alertaValidacaoPermicao(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Permissoes negadas");
+        builder.setMessage("Para usar esse app é nescessario aceitar as permissões!");
+
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
