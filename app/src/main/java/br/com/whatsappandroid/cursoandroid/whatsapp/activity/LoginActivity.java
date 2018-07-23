@@ -10,9 +10,11 @@ import android.widget.EditText;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import br.com.whatsappandroid.cursoandroid.whatsapp.R;
+import br.com.whatsappandroid.cursoandroid.whatsapp.helper.Preferencias;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -70,6 +72,13 @@ public class LoginActivity extends AppCompatActivity {
 
                 Log.i("TOKEN", token);
 
+                //Salvar dadaos de validação
+                Preferencias preferencias = new Preferencias(LoginActivity.this);
+                preferencias.salvarUsuarioPreferencias(nomeUsuario, telefoneSemFormatacao,token); // passando os parametros para ser salvos no arquivo
+
+                HashMap<String, String> usuario = preferencias.getDadosUsuarios(); //recuperando os dados do usuario
+
+                Log.i("Token","T:" + usuario.get("token") + "NOME:" + usuario.get("nome") + "FONE:" + usuario.get("telefone"));
 
             }
         });
