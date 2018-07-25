@@ -12,6 +12,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 import br.com.whatsappandroid.cursoandroid.whatsapp.R;
@@ -65,9 +68,29 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     usuario.setId(usuarioFirebase.getUid());//recuperando o id do Firebase
                     usuario.salvar();
 
+                    autenticacao.signOut(); //deslogar o usuario
+                    finish();
+
                 }
                 else{
-                    Toast.makeText(CadastroUsuarioActivity.this, "Erro ao cadastrar!", Toast.LENGTH_SHORT).show();
+
+                    String erroexcecao = "";
+
+                    try {
+                        throw task.getException(); //lança essa exceção para ser tratar no catch
+                    }catch (FirebaseAuthWeakPasswordException e){ //exceção quando a senha eh fraca
+                        erroexcecao = "Digite uma senha mais forte que contenha mais caracteres com letras e números";
+                    }catch (FirebaseAuthInvalidCredentialsException e){ // exceção quando o email está incorreto
+                        erroexcecao = "Email digitado é inválido, digite um novo e-mail novamente.";
+                    }catch (FirebaseAuthUserCollisionException e) { //exceção quando o email ja exite no app
+                        erroexcecao = "Esse e-mail já está em uso no APP!";
+                    }
+                    catch (Exception e){
+                        erroexcecao = "Erro ao efetuar o cadastro!";
+                        e.printStackTrace();
+                    }
+
+                    Toast.makeText(CadastroUsuarioActivity.this, "Erro: " + erroexcecao, Toast.LENGTH_SHORT).show();
                 }
             }
         });
