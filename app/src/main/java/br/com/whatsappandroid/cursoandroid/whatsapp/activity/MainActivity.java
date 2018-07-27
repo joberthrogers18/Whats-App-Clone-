@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,13 +18,15 @@ import br.com.whatsappandroid.cursoandroid.whatsapp.config.ConfiguracaoFirebase;
 public class MainActivity extends AppCompatActivity {
 
     private Button botaoSair;
-    private FirebaseAuth autenticacao;
+    private FirebaseAuth usuarioAutenticacao;
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        usuarioAutenticacao = ConfiguracaoFirebase.getFireBaseAuth();
 
         toolbar = findViewById(R.id.toobar);
         toolbar.setTitle("WhatsApp");
@@ -52,5 +55,29 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main,menu); // parametros: menu_main e o menu padrão do metodo
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //chamado quando um item do menu eh selecionado
+
+        switch (item.getItemId()){  // qual dos menus foi selecionado
+
+            case R.id.item_sair:
+                deslogarUsuario();
+                return true;
+            case R.id.item_configuracoes:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    public void deslogarUsuario(){
+
+        usuarioAutenticacao.signOut();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
