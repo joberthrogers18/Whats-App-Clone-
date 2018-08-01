@@ -1,6 +1,7 @@
 package br.com.whatsappandroid.cursoandroid.whatsapp.activity;
 
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,14 +13,19 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import br.com.whatsappandroid.cursoandroid.whatsapp.Adapter.TabAdapter;
 import br.com.whatsappandroid.cursoandroid.whatsapp.R;
 import br.com.whatsappandroid.cursoandroid.whatsapp.config.ConfiguracaoFirebase;
+import br.com.whatsappandroid.cursoandroid.whatsapp.helper.SlidingTabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button botaoSair;
     private FirebaseAuth usuarioAutenticacao;
     private Toolbar toolbar;
+
+    private SlidingTabLayout slidingTabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });*/
+
+
+       slidingTabLayout = findViewById(R.id.stl_tabs);
+       viewPager = findViewById(R.id.vp_pagina);
+
+       //configurar o adapter
+                                                                                //getSupportManager nada mais eh que uma habilitação dinamida para modificações de fragments
+        TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager()); //passa para a tabAdapter para que a classe possa gerenciar os fragments quando apertar
+        viewPager.setAdapter(tabAdapter); //adaptador para recuperar os itens, os fragmento, a quantidade de paginas e os titulos das abas
+
+        slidingTabLayout.setViewPager(viewPager); //
+
     }
 
     @Override
