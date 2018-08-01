@@ -33,7 +33,7 @@ public class TabAdapter extends FragmentStatePagerAdapter { //recomendado para l
                 break;
         }
 
-        return null;
+        return fragment;
     }
 
     @Override

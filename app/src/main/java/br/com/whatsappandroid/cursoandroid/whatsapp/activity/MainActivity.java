@@ -34,24 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
         usuarioAutenticacao = ConfiguracaoFirebase.getFireBaseAuth();
 
-        toolbar = findViewById(R.id.toobar);
+          toolbar = findViewById(R.id.toobar);
         toolbar.setTitle("WhatsApp");
         setSupportActionBar(toolbar); //metodo de suporte da actionbar, para funcionar corretamente
 
-       /* botaoSair = findViewById(R.id.bt_sair);
-
-        botaoSair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                autenticacao = ConfiguracaoFirebase.getFireBaseAuth();
-                autenticacao.signOut(); //desloga o user
-
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent); //muda a activty
-
-            }
-        });*/
 
 
        slidingTabLayout = findViewById(R.id.stl_tabs);
@@ -61,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                                                                                 //getSupportManager nada mais eh que uma habilitação dinamida para modificações de fragments
         TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager()); //passa para a tabAdapter para que a classe possa gerenciar os fragments quando apertar
         viewPager.setAdapter(tabAdapter); //adaptador para recuperar os itens, os fragmento, a quantidade de paginas e os titulos das abas
-
         slidingTabLayout.setViewPager(viewPager); //
 
     }
